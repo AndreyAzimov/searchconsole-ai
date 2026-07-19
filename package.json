@@ -1,0 +1,40 @@
+{
+  "name": "searchconsole-ai",
+  "version": "0.1.0",
+  "description": "Set up the hosted, read-only SearchConsole.ai MCP server in Codex, Claude Code, or Cursor.",
+  "keywords": [
+    "google-search-console",
+    "search-console",
+    "gsc",
+    "mcp",
+    "model-context-protocol",
+    "seo",
+    "codex",
+    "claude",
+    "cursor"
+  ],
+  "homepage": "https://searchconsole.ai/?ref=npm",
+  "bugs": {
+    "url": "https://searchconsole.ai/support"
+  },
+  "license": "MIT",
+  "type": "module",
+  "bin": {
+    "searchconsole-ai": "bin/searchconsole-ai.js"
+  },
+  "files": [
+    "bin",
+    "lib",
+    "README.md"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "test": "node --test",
+    "pack:check": "npm pack --dry-run"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
