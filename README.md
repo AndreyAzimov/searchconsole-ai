@@ -1,6 +1,6 @@
-# SearchConsole.ai
+# Google Search Console MCP (GSC) — SearchConsole.ai
 
-Set up the hosted, read-only Google Search Console MCP server in Codex, Claude Code, or Cursor.
+SearchConsole.ai is a hosted, read-only Google Search Console MCP server for GSC search analytics, SEO performance, URL inspection, indexing diagnostics, and sitemaps. Use the Google Search Console API as an SEO MCP integration in Codex, Claude Code, Cursor, ChatGPT, or another OAuth-capable MCP client without creating a Google Cloud project.
 
 ```bash
 npx -y searchconsole-ai@latest setup
@@ -14,12 +14,12 @@ npx -y searchconsole-ai@latest setup claude
 npx -y searchconsole-ai@latest setup cursor
 ```
 
-## Why SearchConsole.ai?
+## Google Search Console MCP features
 
 - No Google Cloud project or downloaded OAuth credentials
 - Hosted Streamable HTTP MCP endpoint
-- Google OAuth with read-only Search Console access
-- Search analytics, period comparisons, URL inspection, indexing diagnostics, and sitemaps
+- Google OAuth with read-only Google Search Console access
+- GSC search analytics, period comparisons, URL inspection, indexing diagnostics, and sitemaps
 - Works with Codex, Claude Code, Cursor, ChatGPT, and other OAuth-capable MCP clients
 
 ## What the setup command does
