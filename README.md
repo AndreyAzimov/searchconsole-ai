@@ -61,6 +61,8 @@ https://searchconsole.ai/mcp
 
 Full instructions: [searchconsole.ai](https://searchconsole.ai/?ref=npm)
 
+Public source and release history: [github.com/AndreyAzimov/searchconsole-ai](https://github.com/AndreyAzimov/searchconsole-ai)
+
 ## Privacy and support
 
 - [Privacy policy](https://searchconsole.ai/privacy)

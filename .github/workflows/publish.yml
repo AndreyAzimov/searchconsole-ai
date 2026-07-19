@@ -1,0 +1,33 @@
+name: Stage npm release
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify-and-stage:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - name: Check out the release commit
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+
+      - name: Use Node.js
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: 22.22.2
+          registry-url: https://registry.npmjs.org
+          package-manager-cache: false
+
+      - name: Test
+        run: npm test
+
+      - name: Verify package contents
+        run: npm run security:check
+
+      - name: Stage release for passkey approval
+        run: npx --yes npm@12.0.1 stage publish

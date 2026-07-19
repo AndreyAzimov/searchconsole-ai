@@ -1,5 +1,13 @@
 import assert from "node:assert/strict";
-import { mkdirSync, mkdtempSync, readFileSync, writeFileSync } from "node:fs";
+import {
+  existsSync,
+  mkdirSync,
+  mkdtempSync,
+  readFileSync,
+  readdirSync,
+  symlinkSync,
+  writeFileSync,
+} from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import test from "node:test";
@@ -99,6 +107,29 @@ test("writes Cursor config atomically and backs up an existing file", () => {
   assert.equal(readFileSync(result.backupPath, "utf8"), original);
   assert.equal(written.mcpServers[SERVER_NAME].url, SERVER_URL);
   assert.match(messages.join("\n"), /complete OAuth/);
+  assert.equal(readdirSync(path.dirname(configPath)).some((name) => name.startsWith(".searchconsole-ai-")), false);
+});
+
+test("refuses to replace a symlinked Cursor configuration", () => {
+  const directory = mkdtempSync(path.join(os.tmpdir(), "searchconsole-ai-test-"));
+  const configDirectory = path.join(directory, ".cursor");
+  const configPath = path.join(configDirectory, "mcp.json");
+  const targetPath = path.join(directory, "actual-mcp.json");
+  mkdirSync(configDirectory, { recursive: true });
+  writeFileSync(targetPath, JSON.stringify({ mcpServers: {} }));
+  symlinkSync(targetPath, configPath);
+
+  assert.throws(() => setupCursor({ configPath, output: { log: () => {} } }), /regular file/);
+  assert.equal(existsSync(configPath), true);
+  assert.equal(readFileSync(targetPath, "utf8"), JSON.stringify({ mcpServers: {} }));
+});
+
+test("refuses an unexpectedly large Cursor configuration", () => {
+  const directory = mkdtempSync(path.join(os.tmpdir(), "searchconsole-ai-test-"));
+  const configPath = path.join(directory, "mcp.json");
+  writeFileSync(configPath, " ".repeat(1024 * 1024 + 1));
+
+  assert.throws(() => setupCursor({ configPath, output: { log: () => {} } }), /maximum 1 MiB/);
 });
 
 test("does not add a command client twice but still starts OAuth", () => {
