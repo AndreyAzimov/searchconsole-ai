@@ -39,7 +39,11 @@ const pack = spawnSync("npm", ["pack", "--dry-run", "--json", "--ignore-scripts"
 if (pack.error) throw pack.error;
 if (pack.status !== 0) throw new Error(`npm pack failed: ${pack.stderr.trim()}`);
 
-const result = JSON.parse(pack.stdout)[0];
+const packResult = JSON.parse(pack.stdout);
+const result = Array.isArray(packResult) ? packResult[0] : packResult[manifest.name];
+if (!result || !Array.isArray(result.files)) {
+  throw new Error("npm pack returned an unexpected result; refusing to publish.");
+}
 const actualFiles = result.files.map((file) => file.path).sort();
 const expectedFiles = [
   "LICENSE",
