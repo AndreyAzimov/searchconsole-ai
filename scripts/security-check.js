@@ -63,6 +63,12 @@ const forbiddenPatterns = [
   /\bnpm_[A-Za-z0-9]{20,}\b/,
   /\bghp_[A-Za-z0-9]{20,}\b/,
   /\bgithub_pat_[A-Za-z0-9_]{20,}\b/,
+  /\bAKIA[0-9A-Z]{16}\b/,
+  /\bAIza[0-9A-Za-z_-]{35}\b/,
+  /\bxox[baprs]-[0-9A-Za-z-]{10,}\b/,
+  /https?:\/\/[^/\s:@]+:[^@\s/]+@/,
+  /https?:\/\/(?:localhost|127\.0\.0\.1|10\.[0-9.]+|192\.168\.[0-9.]+|172\.(?:1[6-9]|2[0-9]|3[01])\.[0-9.]+)/i,
+  /(?:\/Users\/|\/home\/)[^/\s]+\//,
   /"client_secret"\s*:/,
 ];
 for (const relativePath of actualFiles) {

@@ -1,6 +1,6 @@
 {
   "name": "searchconsole-ai",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Set up the hosted, read-only SearchConsole.ai MCP server in Codex, Claude Code, or Cursor.",
   "keywords": [
     "google-search-console",

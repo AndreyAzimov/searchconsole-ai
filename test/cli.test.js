@@ -89,6 +89,30 @@ test("refuses to overwrite a conflicting Cursor server", () => {
   assert.throws(() => mergeCursorConfig(source), /different URL/);
 });
 
+test("does not print existing Cursor secrets during a dry run", () => {
+  const directory = mkdtempSync(path.join(os.tmpdir(), "searchconsole-ai-test-"));
+  const configPath = path.join(directory, "mcp.json");
+  const privateValue = "private-value-that-must-not-be-printed";
+  writeFileSync(configPath, JSON.stringify({
+    mcpServers: {
+      existing: { command: "example", env: { API_TOKEN: privateValue } },
+    },
+  }));
+
+  const messages = [];
+  const result = setupCursor({
+    configPath,
+    dryRun: true,
+    output: { log: (message) => messages.push(message) },
+  });
+
+  const output = messages.join("\n");
+  assert.equal(result.dryRun, true);
+  assert.match(output, new RegExp(SERVER_URL.replaceAll(".", "\\.")));
+  assert.doesNotMatch(output, new RegExp(privateValue));
+  assert.equal(readFileSync(configPath, "utf8").includes(privateValue), true);
+});
+
 test("writes Cursor config atomically and backs up an existing file", () => {
   const directory = mkdtempSync(path.join(os.tmpdir(), "searchconsole-ai-test-"));
   const configPath = path.join(directory, ".cursor", "mcp.json");
