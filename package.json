@@ -1,6 +1,6 @@
 {
   "name": "searchconsole-ai",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Hosted read-only Google Search Console MCP server (GSC) for SEO analytics in Codex, Claude Code, Cursor, and ChatGPT.",
   "keywords": [
     "google search console",
@@ -26,7 +26,7 @@
     "cursor",
     "chatgpt"
   ],
-  "homepage": "https://searchconsole.ai/?ref=npm",
+  "homepage": "https://searchconsole.ai",
   "repository": {
     "type": "git",
     "url": "https://github.com/AndreyAzimov/searchconsole-ai.git"
