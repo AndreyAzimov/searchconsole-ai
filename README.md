@@ -63,6 +63,19 @@ Full instructions: [searchconsole.ai](https://searchconsole.ai/?ref=npm)
 
 Public source and release history: [github.com/AndreyAzimov/searchconsole-ai](https://github.com/AndreyAzimov/searchconsole-ai)
 
+## How to use it
+
+After configuring the server, complete the client's OAuth sign-in with a Google account that has access to your Search Console properties. Then ask your AI assistant to use SearchConsole.ai, specifying the property and date range you want to analyze.
+
+Example prompts:
+
+- "For example.com, compare clicks, impressions, CTR, and average position for the last 28 complete days with the preceding 28 days. Which pages lost the most clicks?"
+- "Find queries for example.com with high impressions and low CTR over the last 28 complete days. Suggest improvements based on the Search Console data."
+- "Inspect https://example.com/my-page and explain the indexing status reported by Google Search Console."
+- "List the sitemaps for example.com and summarize any reported errors or warnings."
+
+Replace the example domain and URL with your own. SearchConsole.ai reads Search Console data; it does not edit your website, submit sitemaps, or request indexing.
+
 ## Privacy and support
 
 - [Privacy policy](https://searchconsole.ai/privacy)
